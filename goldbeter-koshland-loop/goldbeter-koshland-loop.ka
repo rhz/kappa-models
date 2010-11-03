@@ -1,0 +1,9 @@
+'E1 W assoc' W(x~u),E1(x) <-> W(x~u!1),E1(x!1) @ 100,50
+'E1 W mod' W(x~u!1),E1(x!1) -> W(x~p),E1(x) @ 50
+'E2 W1* assoc' W(x~p),E2(x) <-> W(x~p!1),E2(x!1) @ 100,50
+'E2 W1* mod' W(x~p!1),E2(x!1) -> W(x~u),E2(x) @ 50
+%init: 100*W(x~u)
+%init: 12*E1(x)
+%init: 10*E2(x)
+%obs: W(x~u)
+%obs: W(x~p)

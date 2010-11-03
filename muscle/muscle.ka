@@ -1,0 +1,55 @@
+'ATP binding' Myosin(actin!1,atp,st~con), Actin(a~u!1), ADP(s!2,m), Pi(s~b!2) <-> Myosin(actin!1,atp!3,st~con), Actin(a~u!1), ADP(s!2,m!3), Pi(s~b!2) @ 3000000.0,0.01
+'Myosin release' Myosin(actin!1,atp!3,st~con), Actin(a~u!1), ADP(s!2,m!3), Pi(s~b!2) -> Myosin(actin,atp!3,st~rlx), Actin(a~u), ADP(s!2,m!3), Pi(s~b!2) @ 1000000
+'Myosin attchmnt' Myosin(actin,atp!2,st~rlx), Actin(a~u), ADP(s!1,m!2), Pi(s~c!1) <-> Myosin(actin!3,atp!2,st~rlx), Actin(a~u!3), ADP(s!1,m!2), Pi(s~c!1) @ 10.0,0.01
+'ATP cleavage AM' Myosin(actin!3,atp!2,st~rlx), Actin(a~u!3), ADP(s!1,m!2), Pi(s~b!1) <-> Myosin(actin!3,atp!2,st~con), Actin(a~u!3), ADP(s!1,m!2), Pi(s~c!1) @ 10.0,10.0
+'ATP cleavage M' Myosin(actin,atp!2,st~rlx), ADP(s!1,m!2), Pi(s~b!1) -> Myosin(actin,atp!2,st~rlx), ADP(s!1,m!2), Pi(s~c!1) @ 95.0
+#'Arm motion' 
+#'Pi release' ADP(s!1,m!_),Pi(s~c!1) -> ADP(s,m!_),Pi(s~c) @ 40.0
+'Pi release' Myosin(actin!3,atp!2,st~rlx),Actin(a~u!3),ADP(s!1,m!2),Pi(s~c!1) -> Myosin(actin!3,atp!2,st~con),Actin(a~u!3),ADP(s,m!2),Pi(s~c) @ 40.0
+'ADP release' Myosin(actin!1,atp!2,st~con), Actin(a~u!1), ADP(s,m!2) -> Myosin(actin!1,atp,st~con), Actin(a~u!1), ADP(s,m) @ 40.0
+'Ca++ binding' Troponin(c), Ca(s,loc~cyt) <-> Troponin(c!1), Ca(s!1,loc~cyt) @ 100.0,100.0
+'Troponin block' Troponin(c,t!8), Tropomyosin(t!8,one!9,two!10,thr!11,fou!12,fiv!13,six!14,sev!15), Actin(a~u,m!9), Actin(a~u,m!10), Actin(a~u,m!11), Actin(a~u,m!12), Actin(a~u,m!13), Actin(a~u,m!14), Actin(a~u,m!15) -> Troponin(c,t!8), Tropomyosin(t!8,one!9,two!10,thr!11,fou!12,fiv!13,six!14,sev!15), Actin(a~b,m!9), Actin(a~b,m!10), Actin(a~b,m!11), Actin(a~b,m!12), Actin(a~b,m!13), Actin(a~b,m!14), Actin(a~b,m!15) @ 1000000.0
+#'Block push' Myosin(actin!3,atp!2,st~con), Actin(a~b!3), ADP(s!1,m!2), Pi(s~b!1) -> Myosin(actin,atp!2,st~rlx), Actin(a~b), ADP(s!1,m!2), Pi(s~b!1) @ 10.0
+
+#'Actin block' Actin(a~u) -> Actin(a~b) @ 100.0
+#'Actin unblock' Actin(a~b), Ca(loc~cyt) -> Actin(a~u), Ca(loc~cyt) @ 1.0
+#'Fuerza decay' Fuerza() -> basura() @ 4.0
+'Troponin unblock' Troponin(c!7,t!8), Ca(s!7,loc~cyt), Tropomyosin(t!8,one!9,two!10,thr!11,fou!12,fiv!13,six!14,sev!15), Actin(a~b,m!9), Actin(a~b,m!10), Actin(a~b,m!11), Actin(a~b,m!12), Actin(a~b,m!13), Actin(a~b,m!14), Actin(a~b,m!15) -> Troponin(c!7,t!8), Ca(s!7,loc~cyt), Tropomyosin(t!8,one!9,two!10,thr!11,fou!12,fiv!13,six!14,sev!15), Actin(a~u,m!9), Actin(a~u,m!10), Actin(a~u,m!11), Actin(a~u,m!12), Actin(a~u,m!13), Actin(a~u,m!14), Actin(a~u,m!15) @ 100.0
+'Ca++ release' AP(st~act), Ca(s,loc~ret) -> AP(st~act), Ca(s,loc~cyt) @ 1.0
+'Ca pumping' Ca(s,loc~cyt) -> Ca(s,loc~ret) @ 1000.0
+'AP generation' AP(st~rest) -> AP(st~act) @ 0.0
+'AP off' AP(st~act) -> AP(st~rest) @ 0.001
+%init: 100000 * (ADP(s!1,m), Pi(s~b!1))
+%init: 10000 * (Ca(s,loc~ret))
+%init: 20 * (Ca(s,loc~cyt))
+%init: 10000 * (AP(st~rest))
+%init: 300 * (Myosin(actin,atp!2,st~rlx), ADP(s!1,m!2), Pi(s~b!1))
+#%init: 350 * (Actin(a~b,m))
+%init: 100 * Troponin(c,t!8), Tropomyosin(t!8,one!9,two!10,thr!11,fou!12,fiv!13,six!14,sev!15), Actin(a~b,m!9), Actin(a~b,m!10), Actin(a~b,m!11), Actin(a~b,m!12), Actin(a~b,m!13), Actin(a~b,m!14), Actin(a~b,m!15)
+%obs: 'AP' AP(st~act)
+%obs: 'bnd_Ca++' Ca(s!_)
+%obs: 'unbl_Actin' Actin(a~u?,m?)
+%obs: 'blck_Actin' Actin(a~b?,m?)
+%obs: 'Ca++' Ca(loc~cyt)
+%obs: 'Contraction' Myosin(st~con)
+#%obs: 'Fuerza' Fuerza()
+%mod: $T>0.00005 do 'AP generation':=$INF
+#%mod: $T>0.075 do 'AP generation':=$INF 
+#%mod: $T>0.1 do 'AP generation':=$INF
+#%mod: $T>0.125 do 'AP generation':=$INF
+#%mod: $T>0.15 do 'AP generation':=$INF
+#%mod: $T>0.175 do 'AP generation':=$INF
+#%mod: ['AP']>993 do 'AP generation':=0.0
+#%mod: ['AP']>993 do 'AP off':=$INF
+#%mod: ['AP']>994 do 'AP generation':=0.0
+#%mod: ['AP']>994 do 'AP off':=10000.0 
+#%mod: ['AP']>995 do 'AP generation':=0.0
+#%mod: ['AP']>995 do 'AP off':=10000.0 
+#%mod: ['AP']>996 do 'AP generation':=0.0
+#%mod: ['AP']>996 do 'AP off':=10000.0 
+#%mod: ['AP']>997 do 'AP generation':=0.0
+#%mod: ['AP']>997 do 'AP off':=10000.0 
+%mod: ['AP']>9998 do 'AP generation':=0.0
+%mod: ['AP']>9998 do 'AP off':=10000.0 
+#%mod: ['AP']>999 do 'AP generation':=0.0
+#%mod: ['AP']>999 do 'AP off':=$INF 

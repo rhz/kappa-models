@@ -1,0 +1,22 @@
+# Mad-Med complex formation
+'MadMed' Mad(m), Med(m) <-> Mad(m!1), Med(m!1) @ 1,0.2
+# Zen transcription: mmb = Mad-Med-Brk union site, p = promoter union site, m = Mad/Med union site
+'ZenPromoterMadMedBinding' pZen(mmb), Mad(m!1, p), Med(m!1) <-> pZen(mmb!2), Mad(m!1, p!2), Med(m!1) @ 1,0.2
+'ZenTranscription' RNApol(), pZen(mmb!1), Mad(m!2, p!1), Med(m!2) -> RNApol(), pZen(mmb!1), Mad(m!2, p!1), Med(m!2), Zen(p) @ 1
+'ZenPromoterBrkBinding' pZen(mmb), Brk(p) <-> pZen(mmb!1), Brk(p!1) @ 1,0.2
+# Ance transcription
+'AncePromoterZenBinding' pAnce(z), Zen(p) <-> pAnce(z!1), Zen(p!1) @ 1,0.2
+'AncePromoterMadMedBinding' pAnce(mm), Mad(m!1, p), Med(m!1) <-> pAnce(mm!2), Mad(m!1, p!2), Med(m!1) @ 1,0.2
+'AnceTranscription' RNApol(), pAnce(z!1, mm!2), Zen(p!1), Mad(p!2, m!3), Med(m!3) ->
+  RNApol(), pAnce(z!1, mm!2), Zen(p!1), Mad(p!2, m!3), Med(m!3), Ance() @ 1
+# Degradation
+'DegradationZen' Zen() -> X() @ 0.1
+'DegradationAnce' Ance() -> Y() @ 0.1
+# Initial mixture
+%init: 1 * (pZen(mmb), pAnce(z, mm))
+%init: 100 * RNApol()
+%init: 100 * (Mad(m, p), Med(m))
+%init: 10 * Brk(p)
+# Observables
+%obs: Zen()
+%obs: Ance()
