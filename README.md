@@ -3,4 +3,4 @@ This is a repository for molecular biology models written in the <a href="http:/
 #### Available models
  * <a href="http://rulebase.org/showcase_books/182387-Goldbeter-Koshland-loop">Goldbeter-Koshland loop</a>
  * Drosophila melanogaster development
- * Muscle contraction
+ * Muscle contraction (by <a href="https://github.com/cravello">cravello</a>)
